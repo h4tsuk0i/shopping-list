@@ -4,6 +4,7 @@ import { type CartItemType } from '../types/types';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import {Divider} from '@mui/material';
 
 
 interface CartProps{
@@ -24,39 +25,39 @@ const Cart: React.FC<CartProps> = ({
   const total = subtotal + shipping;
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <Box>
-        <Typography component="div" variant="h2">
-          My Products
-        </Typography>
-        <Button onClick={clearCart}>Delete all</Button>
+    <Box sx={{ p: 2, border: "1px solid #ddd", borderRadius: 2, bgcolor: "#fff" }}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+        <Typography variant="h6">My Products</Typography>
+        <Button color="error" onClick={clearCart}>
+          Delete all
+        </Button>
       </Box>
 
       {cart.map((item) => (
-        <CartItem
-          key={item.id}
-          item={item}
-          updateQuantity={updateQuantity}
-          removeItem={removeItem}
-        />
+        <CartItem key={item.id} item={item} updateQuantity={updateQuantity} removeItem={removeItem} />
       ))}
 
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Box>
-          <span>Subtotal</span>
-          <span>{subtotal.toFixed(2)} €</span>
-        </Box>
-        <Box>
-          <span>Shipping</span>
-          <span>{shipping ? shipping.toFixed(2) + " €" : "— — —"}</span>
-        </Box>
-        <Box>
-          <span>Total (EUR)</span>
-          <span>{total.toFixed(2)} €</span>
-        </Box>
-        <Button>Confirm order</Button>
+      <Divider sx={{ my: 2 }} />
+
+      <Box display="flex" justifyContent="space-between" mb={1}>
+        <Typography>Subtotal</Typography>
+        <Typography>{subtotal.toFixed(2)} €</Typography>
       </Box>
+
+      <Box display="flex" justifyContent="space-between" mb={1}>
+        <Typography>Shipping</Typography>
+        <Typography>{shipping ? shipping.toFixed(2) + " €" : "— — —"}</Typography>
       </Box>
+
+      <Box display="flex" justifyContent="space-between" fontWeight="bold" mb={2}>
+        <Typography>Total (EUR)</Typography>
+        <Typography>{total.toFixed(2)} €</Typography>
+      </Box>
+
+      <Button variant="contained" color="success" fullWidth>
+        Confirm order
+      </Button>
+    </Box>
   );
 };
 

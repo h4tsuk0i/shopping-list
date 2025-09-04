@@ -1,12 +1,11 @@
 import React from 'react';
 import { type CartItemType } from '../types/types';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import { Delete} from '@mui/icons-material';
+import { Remove } from '@mui/icons-material';
+import { Add } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { Button } from '@mui/material';
 
 interface CartItemProps{
     item: CartItemType;
@@ -16,34 +15,25 @@ interface CartItemProps{
 
 const CartItem: React.FC<CartItemProps> = ({item, updateQuantity, removeItem}) => {
     return(
-        <Card sx={{ display: 'flex' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-        <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image={item.thumbnail}
-        alt={item.title}
-            />
-          <Typography component="div" variant="h4">
-            {item.title}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            component="div"
-            sx={{ color: 'text.secondary' }}
-          >
-            {item.price}
-          </Typography>
-        </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'right', pl: 1, pb: 1 }}>
-         <Button onClick={() => updateQuantity(item.id, item.qty + 1)}>+</Button>
-         <span>{item.qty}</span>
-         <Button onClick={() => updateQuantity(item.id, item.qty - 1)}>-</Button>
-         <IconButton aria-label="delete" onClick={() => removeItem(item.id)}></IconButton> 
+      <Box display="flex" alignItems="center" mb={2}>
+      <img src={item.thumbnail} alt={item.title} width={60} height={60} style={{ borderRadius: 8, marginRight: 12 }} />
+      <Box flex={1}>
+        <Typography variant="subtitle1">{item.title}</Typography>
+        <Typography color="text.secondary">{item.price} €</Typography>
+        <Box display="flex" alignItems="center" mt={1}>
+          <IconButton size="small" onClick={() => updateQuantity(item.id, item.qty - 1)}>
+            <Remove />
+          </IconButton>
+          <Typography>{item.qty}</Typography>
+          <IconButton size="small" onClick={() => updateQuantity(item.id, item.qty + 1)}>
+            <Add />
+          </IconButton>
+          <IconButton size="small" color="error" onClick={() => removeItem(item.id)}>
+            <Delete />
+          </IconButton>
         </Box>
       </Box>
-    </Card>
+    </Box>
     )
 };
 
