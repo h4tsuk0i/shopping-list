@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductCard from "./ProductCard";
 import {type Product} from "../types/types";
-import { Box } from '@mui/material';
+import {Grid} from '@mui/material';
 
 interface ProductListProps{
     products: Product[];
@@ -10,15 +10,13 @@ interface ProductListProps{
 
 const ProductList: React.FC<ProductListProps> = ({products, addToCart}) => {
     return(
-        <Box sx={{ display: 'flex', flexDirection: 'column'}}>
-            {products.map((product) => (
-                <ProductCard
-                 key={product.id}
-                 product={product}
-                 addToCart={addToCart}
-                 />
-            ))}
-        </Box>
+    <Grid container spacing={2}>
+         {products.map((product) => (
+          <Grid>
+            <ProductCard product={product} addToCart={addToCart} />
+          </Grid>
+         ))}
+      </Grid>
     );
 };
 
