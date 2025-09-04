@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
-import { Box } from "@mui/material";
 import {Typography} from "@mui/material";
 import { type Product, type CartItemType } from "../types/types";
+import { Container, Grid, Box } from "@mui/material";
+
+
 
 const ShoppingList: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -42,22 +44,30 @@ const ShoppingList: React.FC = () => {
     const clearCart = () => setCart([]);
 
     return (
-        <Box>
-            <Box>
-                <Typography component="div" variant="h2">
-                    New Products
-                </Typography>
-                <ProductList products={products} addToCart={addToCart} />
-            </Box>
-            <Box>
-               <Cart
-                    cart={cart}
-                    updateQuantity={updateQuantity}
-                    removeItem={removeItem}
-                    clearCart={clearCart}
-                /> 
-           </Box>
-        </Box>
+        <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Grid container spacing={4}>
+          {/* Left Panel */}
+          <Grid size={{ xs: 12, md: 8 }} >
+  
+            <Typography variant="h5" gutterBottom>
+              New products
+            </Typography>
+              <Box display="flex" justifyContent="center" mt={4}>
+              </Box>
+              <ProductList products={products} addToCart={addToCart} />
+          </Grid>
+  
+          {/* Right Panel */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Cart
+              cart={cart}
+              updateQuantity={updateQuantity}
+              removeItem={removeItem}
+              clearCart={clearCart}
+            />
+          </Grid>
+        </Grid>
+      </Container>
     );
 };
 

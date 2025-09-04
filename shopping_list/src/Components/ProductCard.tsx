@@ -16,17 +16,27 @@ const ProductCard: React.FC<CardProps> = ({ product, addToCart }) => {
 
   return (
  
-    <Card>
-      <CardMedia component="img" height="140" image={product.thumbnail} alt={product.title} />
-      <CardContent>
-        <Typography variant="h6">{product.title}</Typography>
+    <Card sx={{ height: "100%" }}>
+      <CardMedia    component="img"
+        height="80"
+        image={product.thumbnail}
+        alt={product.title}
+        sx={{ objectFit: "contain", bgcolor: "#fafafa" }} />
+      <CardContent
+        sx={{
+        flexGrow: 1,
+        p: 1,
+        "&:last-child": { pb: 1 }, // avoid extra padding at bottom
+      }}>
+        <Typography variant="body1" fontWeight="bold" noWrap sx={{fontSize: "0.9rem"}}>
+          {product.title}</Typography>
         <Typography variant="body2" color="text.secondary" gutterBottom>
           {product.description.slice(0, 60)}...
         </Typography>
         <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
           {product.price} €
         </Typography>
-        <Button variant="contained" fullWidth sx={{ mt: 1 }} onClick={() => addToCart(product)}>
+        <Button variant="contained" fullWidth sx={{ mt: "auto", fontSize: "0.75rem", py: 0.5 }} onClick={() => addToCart(product)}>
           Add to list
         </Button>
       </CardContent>
