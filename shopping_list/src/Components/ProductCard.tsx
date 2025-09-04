@@ -43,7 +43,7 @@ const ProductCard: React.FC<CardProps> = ({ product, addToCart }) => {
             {product.price}
             </Typography>
             <Button variant="contained" endIcon={<AddIcon />} onClick={() => addToCart(product)}>
-                Add to Card
+                Add to Cart
         </Button>
         </Box>
       </Box>
@@ -51,4 +51,4 @@ const ProductCard: React.FC<CardProps> = ({ product, addToCart }) => {
   );
 };
 
-export default Card;
+export default ProductCard;
