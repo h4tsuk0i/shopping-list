@@ -9,5 +9,6 @@ export function App(){
         <Outlet />
         <Footer />
         </>
+
     );
 }

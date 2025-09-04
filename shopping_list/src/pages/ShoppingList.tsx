@@ -3,7 +3,7 @@ import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
 import {Typography} from "@mui/material";
 import { type Product, type CartItemType, type ProductsResponse } from "../types/types";
-import { Container, Grid, Box, TextField, Button } from "@mui/material";
+import { Container, Grid, Box, TextField } from "@mui/material";
 
 
 
@@ -13,12 +13,23 @@ const ShoppingList: React.FC = () => {
     const [cart, setCart] = useState<CartItemType[]>([]);
     const [search, setSearch] = useState("");
 
+    
+    /**
+     * fetch data to display
+     * 
+     */
     useEffect(() => {
         fetch("https://dummyjson.com/products")
             .then((res) => res.json())
             .then((data) => setProducts(data.products));
     },[]);
 
+
+    /**
+     * function to fetch products depening on search query
+     * 
+     * @param query search query
+     */
     const fetchProducts = async (query?: string) => {
         try{
             const url = query
@@ -33,7 +44,11 @@ const ShoppingList: React.FC = () => {
         };
     
 
-
+        /**
+         * function to add product to cart
+         * 
+         * @param product the product
+         */
     const addToCart = (product: Product) => {
         setCart((prev) => {
             const existing = prev.find((item) => item.id === product.id);
@@ -46,6 +61,12 @@ const ShoppingList: React.FC = () => {
         })
     }
 
+    /**
+     * Quantity manipulation of product in cart
+     * 
+     * @param id id of product
+     * @param qty quantity of product
+     */
     const updateQuantity = (id: number, qty: number) => {
         setCart((prev) =>
         prev.map((item) => 
@@ -54,12 +75,26 @@ const ShoppingList: React.FC = () => {
         );
     };
 
+    /**
+     * remove item from cart
+     * 
+     * @param id id of product
+     */
     const removeItem = (id: number) => {
         setCart((prev) => prev.filter((item) => item.id !== id));
     };
 
+    /**
+     * clear the cart
+     * 
+     */
     const clearCart = () => setCart([]);
 
+    /**
+     * handle the search for products
+     * 
+     * @param e event
+     */
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setSearch(value);
@@ -72,9 +107,12 @@ const ShoppingList: React.FC = () => {
     };
 
     return (
+        
         <Container maxWidth="lg" sx={{ py: 4 }}>
+            <Typography variant="h4" align="center" m={3}>
+                My Shopping List
+            </Typography>
         <Grid container spacing={4}>
-          {/* Left Panel */}
           <Grid size={{ xs: 12, md: 8 }} >
           <Box display="flex" gap={2} mb={2}>
             <TextField
@@ -84,9 +122,6 @@ const ShoppingList: React.FC = () => {
               value={search}
               onChange={handleSearch}
             />
-            <Button variant="contained" color="primary">
-              Add new product
-            </Button>
           </Box>
             <Typography variant="h5" gutterBottom>
               New products
@@ -96,14 +131,18 @@ const ShoppingList: React.FC = () => {
               <ProductList products={products} addToCart={addToCart} />
           </Grid>
   
-          {/* Right Panel */}
+          
           <Grid size={{ xs: 12, md: 4 }}>
+            <Box sx={{ position: "sticky", top: 16, 
+                }}
+            >
             <Cart
               cart={cart}
               updateQuantity={updateQuantity}
               removeItem={removeItem}
               clearCart={clearCart}
             />
+            </Box>
           </Grid>
         </Grid>
       </Container>

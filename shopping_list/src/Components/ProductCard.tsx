@@ -26,18 +26,18 @@ const ProductCard: React.FC<CardProps> = ({ product, addToCart }) => {
         sx={{
         flexGrow: 1,
         p: 1,
-        "&:last-child": { pb: 1 }, // avoid extra padding at bottom
+        "&:last-child": { pb: 1 },
       }}>
         <Typography variant="body1" fontWeight="bold" noWrap sx={{fontSize: "0.9rem"}}>
           {product.title}</Typography>
         <Typography variant="body2" color="text.secondary" gutterBottom>
-          {product.description.slice(0, 60)}...
+          {product.description}
         </Typography>
         <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
           {product.price} €
         </Typography>
         <Button variant="contained" fullWidth sx={{ mt: "auto", fontSize: "0.75rem", py: 0.5 }} onClick={() => addToCart(product)}>
-          Add to list
+          Add to Cart
         </Button>
       </CardContent>
     </Card>
