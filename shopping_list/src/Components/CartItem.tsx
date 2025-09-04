@@ -21,7 +21,7 @@ const CartItem: React.FC<CartItemProps> = ({item, updateQuantity, removeItem}) =
         <Typography variant="subtitle1">{item.title}</Typography>
         <Typography color="text.secondary">{item.price} €</Typography>
         <Box display="flex" alignItems="center" mt={1}>
-          <IconButton size="small" onClick={() => updateQuantty(item.id, item.qty - 1)}>
+          <IconButton size="small" onClick={() => updateQuantity(item.id, item.qty - 1)}>
             <Remove />
           </IconButton>
           <Typography>{item.qty}</Typography>

@@ -2,20 +2,37 @@ import React, {useEffect, useState} from "react";
 import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
 import {Typography} from "@mui/material";
-import { type Product, type CartItemType } from "../types/types";
-import { Container, Grid, Box } from "@mui/material";
+import { type Product, type CartItemType, type ProductsResponse } from "../types/types";
+import { Container, Grid, Box, TextField, Button } from "@mui/material";
+
 
 
 
 const ShoppingList: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [cart, setCart] = useState<CartItemType[]>([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         fetch("https://dummyjson.com/products")
             .then((res) => res.json())
-            .then((data) => setProducts(data.products.slice(0,12)));
+            .then((data) => setProducts(data.products));
     },[]);
+
+    const fetchProducts = async (query?: string) => {
+        try{
+            const url = query
+                ? `https://dummyjson.com/products/search?q=${encodeURIComponent(query)}`
+                : "https://dummyjson.com/products?limit=0";
+            const res = await fetch(url);
+            const data: ProductsResponse = await res.json();
+            setProducts(data.products);
+        } catch (error) {
+            console.error("Error fetching products", error);
+            } 
+        };
+    
+
 
     const addToCart = (product: Product) => {
         setCart((prev) => {
@@ -43,12 +60,34 @@ const ShoppingList: React.FC = () => {
 
     const clearCart = () => setCart([]);
 
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearch(value);
+
+        if (value.trim().length > 0){
+            fetchProducts(value);
+        } else {
+            fetchProducts();
+        }
+    };
+
     return (
         <Container maxWidth="lg" sx={{ py: 4 }}>
         <Grid container spacing={4}>
           {/* Left Panel */}
           <Grid size={{ xs: 12, md: 8 }} >
-  
+          <Box display="flex" gap={2} mb={2}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Search..."
+              value={search}
+              onChange={handleSearch}
+            />
+            <Button variant="contained" color="primary">
+              Add new product
+            </Button>
+          </Box>
             <Typography variant="h5" gutterBottom>
               New products
             </Typography>

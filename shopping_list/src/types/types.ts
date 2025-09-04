@@ -10,3 +10,9 @@ export interface Product {
     qty: number;
   }
 
+  export interface ProductsResponse {
+    products: Product[];
+    total: number;
+    skip: number;
+    limit: number;
+  }
