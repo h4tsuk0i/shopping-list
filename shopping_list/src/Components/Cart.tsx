@@ -66,7 +66,7 @@ const Cart = ({ cart, updateQuantity, removeItem, clearCart }: CartProps) => {
         <Typography>{total.toFixed(2)} €</Typography>
       </Box>
 
-      <Button variant="contained" color="success" fullWidth>
+      <Button href="/checkout" variant="contained" color="success" fullWidth>
         Confirm order
       </Button>
     </Box>
