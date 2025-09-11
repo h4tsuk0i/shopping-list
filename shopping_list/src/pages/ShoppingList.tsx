@@ -97,11 +97,10 @@ const ShoppingList = () => {
     const value = e.target.value;
     setSearch(value);
 
-    if (value.trim().length > 0) {
-      fetchProducts(value);
-    } else {
-      fetchProducts();
+    if (value.trim().length === 0) {
+      return fetchProducts();
     }
+    fetchProducts(value);
   };
 
   return (
