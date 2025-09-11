@@ -1,19 +1,19 @@
 import React from 'react';
 import ProductCard from "./ProductCard";
-import {type Product} from "../types/types";
+import {type Product} from "../types/ShoopingList";
 import {Grid} from '@mui/material';
 import {Pagination} from '@mui/material';
 import { useState} from 'react';
 import {Box} from '@mui/material';
 
-interface ProductListProps{
+type ProductListProps = {
     products: Product[];
     addToCart: (product: Product) => void;
-}
+};
 
 const ITEMS_PER_PAGE = 6;
 
-const ProductList: React.FC<ProductListProps> = ({products, addToCart}) => {
+const ProductList = ({products, addToCart}: ProductListProps) => {
   const [page, setPage] = useState(1);
 
   const pageCount = Math.ceil(products.length / ITEMS_PER_PAGE);

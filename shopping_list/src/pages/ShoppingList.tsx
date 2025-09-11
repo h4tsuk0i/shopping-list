@@ -2,13 +2,13 @@ import React, {useEffect, useState} from "react";
 import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
 import {Typography} from "@mui/material";
-import { type Product, type CartItemType, type ProductsResponse } from "../types/types";
+import { type Product, type CartItemType, type ProductsResponse } from "../types/ShoopingList";
 import { Container, Grid, Box, TextField } from "@mui/material";
 
 
 
 
-const ShoppingList: React.FC = () => {
+const ShoppingList = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [cart, setCart] = useState<CartItemType[]>([]);
     const [search, setSearch] = useState("");

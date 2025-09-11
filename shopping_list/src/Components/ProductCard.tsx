@@ -1,19 +1,16 @@
-import React from "react";
-import { type Product } from "../types/types";
+import { type Product } from "../types/ShoopingList";
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button'
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-interface CardProps {
+type CardProps = {
   product: Product;
   addToCart: (product: Product) => void;
-}
+};
 
-const ProductCard: React.FC<CardProps> = ({ product, addToCart }) => {
-
-
+const ProductCard = ({ product, addToCart }: CardProps) => {
   return (
  
     <Card sx={{ height: "100%" }}>

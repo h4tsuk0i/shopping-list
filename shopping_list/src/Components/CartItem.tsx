@@ -1,5 +1,4 @@
-import React from 'react';
-import { type CartItemType } from '../types/types';
+import { type CartItemType } from '../types/ShoopingList';
 import Box from '@mui/material/Box';
 import { Delete} from '@mui/icons-material';
 import { Remove } from '@mui/icons-material';
@@ -7,13 +6,13 @@ import { Add } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
-interface CartItemProps{
+type CartItemProps = {
     item: CartItemType;
     updateQuantity: (id: number, qty: number) => void;
     removeItem: (id: number) => void;
-}
+};
 
-const CartItem: React.FC<CartItemProps> = ({item, updateQuantity, removeItem}) => {
+const CartItem = ({item, updateQuantity, removeItem}: CartItemProps) => {
     return(
       <Box display="flex" alignItems="center" mb={2}>
       <img src={item.thumbnail} alt={item.title} width={60} height={60} style={{ borderRadius: 8, marginRight: 12 }} />
