@@ -14,8 +14,7 @@ type ProductListProps = {
 const ITEMS_PER_PAGE = 6;
 
 const ProductList = ({products, addToCart}: ProductListProps) => {
-  const [page, setPage] = useState(1);
-
+  const [page, setPage] = useState<number>(1);
   const pageCount = Math.ceil(products.length / ITEMS_PER_PAGE);
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
   const currentProducts = products.slice(startIndex, startIndex + ITEMS_PER_PAGE);

@@ -11,13 +11,15 @@ type CardProps = {
 };
 
 const ProductCard = ({ product, addToCart }: CardProps) => {
+  const {title, description, thumbnail, price} = product;
+  
   return (
  
     <Card sx={{ height: "100%" }}>
       <CardMedia    component="img"
         height="80"
-        image={product.thumbnail}
-        alt={product.title}
+        image={thumbnail}
+        alt={title}
         sx={{ objectFit: "contain", bgcolor: "#fafafa" }} />
       <CardContent
         sx={{
@@ -26,12 +28,12 @@ const ProductCard = ({ product, addToCart }: CardProps) => {
         "&:last-child": { pb: 1 },
       }}>
         <Typography variant="body1" fontWeight="bold" noWrap sx={{fontSize: "0.9rem"}}>
-          {product.title}</Typography>
+          {title}</Typography>
         <Typography variant="body2" color="text.secondary" gutterBottom>
-          {product.description}
+          {description}
         </Typography>
         <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-          {product.price} €
+          {price} €
         </Typography>
         <Button variant="contained" fullWidth sx={{ mt: "auto", fontSize: "0.75rem", py: 0.5 }} onClick={() => addToCart(product)}>
           Add to Cart

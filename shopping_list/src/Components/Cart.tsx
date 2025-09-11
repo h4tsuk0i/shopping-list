@@ -23,7 +23,7 @@ const Cart = ({
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const shipping = cart.length > 0 ? 12.41 : 0;
   const total = subtotal + shipping;
-  
+
   return(
     <Box sx={{ p: 2, border: "1px solid #ddd", borderRadius: 2, bgcolor: "#fff" }}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>

@@ -13,21 +13,22 @@ type CartItemProps = {
 };
 
 const CartItem = ({item, updateQuantity, removeItem}: CartItemProps) => {
+  const {thumbnail, title, qty, price, id} = item;
     return(
       <Box display="flex" alignItems="center" mb={2}>
-      <img src={item.thumbnail} alt={item.title} width={60} height={60} style={{ borderRadius: 8, marginRight: 12 }} />
+      <img src={thumbnail} alt={title} width={60} height={60} style={{ borderRadius: 8, marginRight: 12 }} />
       <Box flex={1}>
-        <Typography variant="subtitle1">{item.title}</Typography>
-        <Typography color="text.secondary">{item.price} €</Typography>
+        <Typography variant="subtitle1">{title}</Typography>
+        <Typography color="text.secondary">{price} €</Typography>
         <Box display="flex" alignItems="center" mt={1}>
-          <IconButton size="small" onClick={() => updateQuantity(item.id, item.qty - 1)}>
+          <IconButton size="small" onClick={() => updateQuantity(id, qty - 1)}>
             <Remove />
           </IconButton>
-          <Typography>{item.qty}</Typography>
-          <IconButton size="small" onClick={() => updateQuantity(item.id, item.qty + 1)}>
+          <Typography>{qty}</Typography>
+          <IconButton size="small" onClick={() => updateQuantity(id, qty + 1)}>
             <Add />
           </IconButton>
-          <IconButton size="small" color="error" onClick={() => removeItem(item.id)}>
+          <IconButton size="small" color="error" onClick={() => removeItem(id)}>
             <Delete />
           </IconButton>
         </Box>
